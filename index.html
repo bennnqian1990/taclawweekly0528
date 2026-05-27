@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAClaw及企微ChatBOT建设月度汇报 2026.05</title>
+<meta name="description" content="TAClaw底座与企微ChatBOT建设月度汇报，涵盖本月进展、下月计划。">
+<meta property="og:title" content="TAClaw及企微ChatBOT建设月度汇报 2026.05">
+<meta property="og:description" content="TAClaw底座与企微ChatBOT建设月度汇报，涵盖本月进展、下月计划。">
+<meta property="og:type" content="website">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Noto+Sans+SC:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg-primary: #F5F6FA; --bg-white: #FFFFFF; --bg-section: #F0F2F8;
+    --accent-blue: #3B6BF5; --accent-blue-light: #EBF0FF;
+    --accent-green: #22C55E; --accent-green-light: #ECFDF5;
+    --accent-orange: #F59E0B; --accent-orange-light: #FFF8E6;
+    --accent-red: #EF4444; --accent-red-light: #FEF2F2;
+    --accent-purple: #8B5CF6; --accent-purple-light: #F3F0FF;
+    --text-primary: #1A1D2E; --text-secondary: #4B5072; --text-muted: #8890AB;
+    --border-color: #E5E7F0;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06); --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --radius-sm: 10px; --radius-md: 14px; --radius-lg: 18px;
+  }
+
+  body {
+    font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary); color: var(--text-primary); line-height: 1.7;
+    -webkit-font-smoothing: antialiased; min-height: 100vh;
+  }
+  .container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+
+  .header { padding: 52px 0 40px; text-align: center; }
+  .header-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--bg-section); color: var(--accent-blue);
+    font-size: 11.5px; font-weight: 600; padding: 6px 18px;
+    border-radius: 24px; margin-bottom: 18px; letter-spacing: 1px;
+  }
+  .header-badge .dot {
+    width: 6px; height: 6px; background: var(--accent-blue);
+    border-radius: 50%; animation: pulse-dot 2s infinite;
+  }
+  @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .header h1 { font-size: 26px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; letter-spacing: -0.5px; }
+  .header-date { font-size: 13.5px; color: var(--text-muted); font-weight: 400; letter-spacing: 0.5px; }
+  .header-line { width: 60px; height: 3px; margin: 20px auto 0; background: var(--accent-blue); border-radius: 2px; opacity: 0.6; }
+
+  .section { margin-bottom: 28px; }
+  .section-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+    padding-bottom: 14px; border-bottom: 2px solid var(--border-color);
+  }
+  .section-icon {
+    width: 38px; height: 38px; border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
+  }
+  .section-icon.blue { background: var(--accent-blue-light); }
+  .section-icon.green { background: var(--accent-green-light); }
+  .section-icon.orange { background: var(--accent-orange-light); }
+  .section-icon.red { background: var(--accent-red-light); }
+  .section-icon.purple { background: var(--accent-purple-light); }
+  .section-title { font-size: 17px; font-weight: 600; color: var(--text-primary); letter-spacing: -0.2px; }
+
+  .card {
+    background: var(--bg-white); border-radius: var(--radius-lg);
+    padding: 26px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); margin-bottom: 16px;
+  }
+  .goal-highlight {
+    background: linear-gradient(135deg, var(--accent-blue-light) 0%, #E8EDFF 100%);
+    border-left: 3px solid var(--accent-blue); padding: 18px 20px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 13.5px; color: var(--text-secondary); line-height: 1.95;
+  }
+
+  .sub-header { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; margin-top: 22px; }
+  .sub-header:first-child { margin-top: 0; }
+  .plan-sub-title { font-size: 16px; font-weight: 700; padding: 5px 18px; border-radius: 10px; letter-spacing: 0.3px; }
+  .plan-sub-title.blue { background: var(--accent-blue-light); color: var(--accent-blue); }
+  .plan-sub-title.green { background: var(--accent-green-light); color: #15803D; }
+  .plan-sub-title.purple { background: var(--accent-purple-light); color: #7C3AED; }
+
+  .progress-item { display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start; }
+  .progress-item:last-child { margin-bottom: 0; }
+  .progress-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 8px; flex-shrink: 0; }
+  .progress-dot.blue { background: var(--accent-blue); }
+  .progress-dot.green { background: var(--accent-green); }
+  .progress-dot.purple { background: var(--accent-purple); }
+  .progress-dot.orange { background: var(--accent-orange); }
+  .progress-content { flex: 1; }
+  .progress-content p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.85; }
+  .progress-content strong { color: var(--text-primary); font-weight: 600; }
+
+  .indent-block { margin-left: 22px; padding-left: 18px; border-left: 2px solid var(--border-color); margin-top: 12px; }
+
+  .num-block { padding: 12px 0 6px 0; }
+  .num-block p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.85; margin-bottom: 10px; }
+  .num-block p strong { color: var(--text-primary); font-weight: 600; }
+
+  .case-card {
+    background: var(--accent-green-light); border-radius: var(--radius-sm);
+    padding: 16px 18px; margin-top: 14px; border: 1px solid rgba(34,197,94,0.2);
+  }
+  .case-card .case-label {
+    font-size: 11px; font-weight: 600; color: var(--accent-green);
+    margin-bottom: 8px; display: flex; align-items: center; gap: 4px; letter-spacing: 0.3px;
+  }
+  .case-card p { font-size: 13px; color: #15803D; line-height: 1.75; }
+
+  .table-wrapper {
+    overflow-x: auto; margin-top: 16px; border-radius: var(--radius-md);
+    border: 1px solid var(--border-color); background: var(--bg-white);
+  }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .data-table thead th {
+    background: #2563EB; color: #fff; font-weight: 600;
+    padding: 10px 12px; text-align: center; white-space: nowrap; font-size: 11.5px; letter-spacing: 0.2px;
+  }
+  .data-table thead th:first-child { text-align: left; }
+  .data-table thead th.col-main { background: #334155; }
+  .data-table thead th.col-week { background: #0891B2; }
+  .data-table tbody td {
+    padding: 9px 12px; text-align: center; border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary); font-size: 12px;
+  }
+  .data-table tbody td:first-child { text-align: left; font-weight: 500; color: var(--text-primary); white-space: nowrap; }
+  .data-table tbody tr:last-child td { border-bottom: none; }
+  .data-table tbody tr:hover { background: var(--bg-section); }
+  .data-table tbody tr.total-row { background: var(--accent-blue-light); font-weight: 600; }
+  .data-table tbody tr.total-row td { color: var(--accent-blue); }
+
+  .plan-item {
+    display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px;
+    padding: 12px 16px; background: var(--bg-section);
+    border-radius: var(--radius-sm); border: 1px solid var(--border-color);
+  }
+  .plan-item:last-child { margin-bottom: 0; }
+  .plan-item:hover { border-color: rgba(59,107,245,0.3); }
+  .plan-num {
+    width: 24px; height: 24px; border-radius: 7px; background: var(--accent-blue);
+    color: #fff; font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+  }
+  .plan-text { font-size: 13.5px; color: var(--text-secondary); line-height: 1.75; }
+  .plan-text strong { color: var(--text-primary); }
+
+  .footer { text-align: center; padding: 36px 0 52px; font-size: 12px; color: var(--text-muted); }
+  .footer-divider { width: 60px; height: 3px; background: var(--border-color); border-radius: 2px; margin: 0 auto 14px; }
+
+  .fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+  .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; } .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; } .delay-6 { animation-delay: 0.6s; }
+
+  .img-zoom-wrap {
+    margin-top: 22px; border-radius: var(--radius-md); overflow: hidden;
+    border: 1px solid var(--border-color); cursor: zoom-in; position: relative;
+  }
+  .img-zoom-hint {
+    position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,0.5);
+    color: #fff; font-size: 11px; padding: 4px 10px; border-radius: 8px;
+    pointer-events: none; opacity: 0; transition: opacity 0.25s;
+  }
+  .img-zoom-wrap:hover .img-zoom-hint { opacity: 1; }
+
+  .img-row {
+    display: flex; gap: 16px; margin-top: 18px; margin-bottom: 18px;
+  }
+  .img-row .img-col { flex: 1; min-width: 0; }
+  .img-row .img-zoom-wrap { margin-top: 0; }
+
+  .img-caption {
+    text-align: center; font-size: 12px; color: var(--text-muted);
+    margin-top: 8px; font-weight: 400;
+  }
+
+  @media (max-width: 600px) {
+    .img-row { flex-direction: column; gap: 14px; }
+  }
+
+  .lightbox-overlay {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: rgba(15,17,25,0.88); cursor: zoom-out;
+    align-items: center; justify-content: center; padding: 24px;
+  }
+  .lightbox-overlay.active { display: flex; }
+  .lightbox-overlay img {
+    max-width: 95%; max-height: 95%; border-radius: 12px;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.5);
+    animation: lbZoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes lbZoomIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .lightbox-close {
+    position: absolute; top: 24px; right: 28px; width: 40px; height: 40px;
+    border-radius: 50%; background: rgba(255,255,255,0.1); border: none;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 20px; transition: all 0.2s;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+  @media (max-width: 600px) {
+    .header h1 { font-size: 22px; } .card { padding: 20px; }
+    .data-table { font-size: 11px; }
+    .data-table thead th, .data-table tbody td { padding: 7px 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header fade-in">
+    <div class="header-badge"><span class="dot"></span> MONTHLY REPORT</div>
+    <h1>TAClaw及企微ChatBOT建设月度汇报</h1>
+    <div class="header-date">2026.05</div>
+    <div class="header-line"></div>
+  </div>
+
+  <div class="section fade-in delay-2">
+    <div class="section-header">
+      <div class="section-icon blue">&#127919;</div>
+      <div class="section-title">一、整体目标及里程碑</div>
+    </div>
+    <div class="card">
+      <div class="goal-highlight">
+        TAClaw建设秉持提高财富管理展业效率与专业能力的第一性原理，基于公司各项数据与工具能力，搭建按需调用的Skills能力体系，同时支持自主组合Skills定制，通过<strong>TAClaw调度中枢+大模型+Skills</strong>三层体系，让每个投顾定义自己的操作系统，从而实现投顾服务半径扩大、服务能力增强。同时，基于投顾服务触达最后一公里的企微平台，构建企微ChatBOT，打造<strong>自动化执行助手</strong>及<strong>智能聊天助手</strong>，进一步提升服务效率。
+      </div>
+      <div class="img-zoom-wrap" onclick="openLightbox(this)">
+        <img src="taclaw_roadmap.png" alt="TAClaw及企微ChatBOT建设路线图" style="width: 100%; display: block;">
+        <span class="img-zoom-hint">点击放大</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+  <script>
+    function openLightbox(el) {
+      var src = el.querySelector('img').src;
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
+  <div class="section fade-in delay-3">
+    <div class="section-header">
+      <div class="section-icon green">&#128640;</div>
+      <div class="section-title">二、本月进展</div>
+    </div>
+
+    <div class="sub-header">
+      <span class="plan-sub-title blue">（1）TAClaw建设进展</span>
+    </div>
+    <div class="card">
+      <div class="progress-item">
+        <div class="progress-dot blue"></div>
+        <div class="progress-content">
+          <p><strong>1）TAClaw能力底座建设</strong><br>已完成TAClaw底座功能主体开发，包含交互对话、定时任务、技能广场三项核心能力。</p>
+        </div>
+      </div>
+      <div class="img-zoom-wrap" onclick="openLightbox(this)">
+        <img src="1.png" alt="TAClaw能力底座建设图示" style="width: 100%; display: block;">
+        <span class="img-zoom-hint">点击放大</span>
+      </div>
+      <div class="progress-item" style="margin-top: 20px;">
+        <div class="progress-dot green"></div>
+        <div class="progress-content">
+          <p><strong>2）52项Skill完成开发联调</strong><br>已完成52项基础Skill（涵盖客户、知识库、企微、产品配置、市场分析、日常任务、行情资讯、通用工具、股票投顾场景等<strong>9大类</strong>）的开发与联调工作，五月底测试完成并发布上线。</p>
+        </div>
+      </div>
+      <div class="indent-block">
+        <div class="progress-item">
+          <div class="progress-dot purple"></div>
+          <div class="progress-content">
+            <p><strong>a. 核心重点业务场景</strong>，完成股票组合场景下<strong>7项Skill</strong>开发上线；同时推进算法交易场景下<strong>6项Skill</strong>的开发工作；</p>
+          </div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-dot orange"></div>
+          <div class="progress-content">
+            <p><strong>b. 基础业务场景</strong>，完成客户、知识库、企微、产品配置、市场分析、日常任务、行情资讯、通用工具等<strong>8类45项Skill</strong>开发上线；</p>
+          </div>
+        </div>
+      </div>
+      <div class="progress-item" style="margin-top: 20px;">
+        <div class="progress-dot blue"></div>
+        <div class="progress-content">
+          <p><strong>3）发布计划</strong><br>5月底发布上线，首批灰度<strong>30个投顾</strong>。根据投顾使用反馈，6月份持续优化与调优，扩大覆盖规模。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-header">
+      <span class="plan-sub-title purple">（2）企微ChatBOT建设进展</span>
+    </div>
+    <div class="card">
+      <div class="progress-item">
+        <div class="progress-dot green"></div>
+        <div class="progress-content">
+          <p><strong>1）自动化执行助手：</strong>依托RPA自动化机器人工具，实现企微账号全托管、无需投顾操作、自动执行MOT任务及加好友等，全面释放投顾效能</p>
+        </div>
+      </div>
+      <div class="img-row">
+        <div class="img-col">
+          <div class="img-zoom-wrap" onclick="openLightbox(this)">
+            <img src="2.png" alt="自动化执行助手图示1" style="width: 100%; display: block;">
+            <span class="img-zoom-hint">点击放大</span>
+          </div>
+        </div>
+        <div class="img-col">
+          <div class="img-zoom-wrap" onclick="openLightbox(this)">
+            <img src="3.png" alt="自动化执行助手图示2" style="width: 100%; display: block;">
+            <span class="img-zoom-hint">点击放大</span>
+          </div>
+        </div>
+      </div>
+      <div class="progress-item">
+        <div class="progress-dot blue"></div>
+        <div class="progress-content">
+          <p><strong>a. 当前进展：</strong>自动化执行助手已于<strong>4月14日</strong>分批面向分支启用</p>
+        </div>
+      </div>
+      <div class="indent-block">
+        <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.85; margin-bottom: 8px;">目前500名额当前已激活<strong>310</strong>。截止5月20日，累计成功添加好友<strong>1532</strong>，帮投顾执行MOT任务<strong>21778条</strong>。</p>
+        <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.85; margin-bottom: 16px;">累计使用数据如下（截至0520）：</p>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th rowspan="2" class="col-main">分公司/部门</th>
+              <th rowspan="2" class="col-main">ChatBot<br>账号数量</th>
+              <th rowspan="2" class="col-main">ChatBot<br>启用时间</th>
+              <th colspan="3">累计数据（截至0520）</th>
+              <th colspan="3" class="col-week">单周数据（0514-0520）</th>
+            </tr>
+            <tr>
+              <th>好友邀请数量</th><th>成功加好友</th><th>MOT任务执行数量</th>
+              <th class="col-week">好友邀请数量</th><th class="col-week">成功加好友</th><th class="col-week">MOT任务执行数量</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>深圳</td><td>30</td><td>4月14日</td><td>6328</td><td>586</td><td>1966</td><td>928</td><td>170</td><td>401</td></tr>
+            <tr><td>扬州</td><td>10</td><td>4月15日</td><td>786</td><td>61</td><td>900</td><td>69</td><td>7</td><td>99</td></tr>
+            <tr><td>四川</td><td>30</td><td>4月23日</td><td>2902</td><td>118</td><td>4209</td><td>237</td><td>40</td><td>575</td></tr>
+            <tr><td>湖北</td><td>35</td><td>4月24日</td><td>2294</td><td>98</td><td>2069</td><td>322</td><td>25</td><td>565</td></tr>
+            <tr><td>上海</td><td>40</td><td>4月28日</td><td>14077</td><td>98</td><td>3009</td><td>3470</td><td>14</td><td>652</td></tr>
+            <tr><td>客服中心</td><td>20</td><td>4月29日</td><td>3756</td><td>126</td><td>360</td><td>724</td><td>43</td><td>32</td></tr>
+            <tr><td>苏州</td><td>20</td><td>4月30日</td><td>676</td><td>47</td><td>347</td><td>118</td><td>14</td><td>72</td></tr>
+            <tr><td>广东</td><td>25</td><td>5月6日</td><td>3234</td><td>243</td><td>5484</td><td>248</td><td>19</td><td>393</td></tr>
+            <tr><td>安徽</td><td>10</td><td>5月7日</td><td>778</td><td>51</td><td>440</td><td>241</td><td>26</td><td>225</td></tr>
+            <tr><td>福建</td><td>10</td><td>5月7日</td><td>153</td><td>11</td><td>397</td><td>53</td><td>9</td><td>185</td></tr>
+            <tr><td>山东</td><td>10</td><td>5月8日</td><td>154</td><td>20</td><td>340</td><td>56</td><td>14</td><td>248</td></tr>
+            <tr><td>无锡</td><td>15</td><td>5月8日</td><td>111</td><td>1</td><td>414</td><td>26</td><td>0</td><td>134</td></tr>
+            <tr><td>黑龙江</td><td>10</td><td>5月11日</td><td>119</td><td>6</td><td>502</td><td>41</td><td>5</td><td>334</td></tr>
+            <tr><td>浙江</td><td>20</td><td>5月12日</td><td>148</td><td>7</td><td>412</td><td>63</td><td>6</td><td>269</td></tr>
+            <tr><td>西北</td><td>15</td><td>5月13日</td><td>243</td><td>19</td><td>307</td><td>243</td><td>19</td><td>305</td></tr>
+            <tr><td>湖南</td><td>10</td><td>5月13日</td><td>130</td><td>40</td><td>292</td><td>130</td><td>40</td><td>284</td></tr>
+            <tr class="total-row"><td>总计</td><td>310</td><td>&mdash;</td><td>35889</td><td>1532</td><td>21448</td><td>6969</td><td>451</td><td>4773</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="case-card">
+        <div class="case-label">&#127942; 最佳实践案例</div>
+        <p><strong>广东云城东路证券营业部蚁建凯</strong>表现最为突出，本月通过自动化执行助手成功添加好友<strong>146人</strong>、执行MOT任务<strong>2777条</strong>，两项指标均居全量投顾首位。</p>
+      </div>
+
+      <div class="progress-item" style="margin-top: 20px;">
+        <div class="progress-dot orange"></div>
+        <div class="progress-content">
+          <p><strong>b. 功能建设：</strong>当前功能基于一线投顾使用反馈持续迭代中，本月完成：</p>
+        </div>
+      </div>
+      <div class="indent-block">
+        <div class="num-block">
+          <p>&#8226; <strong>MOT话术自定义&客户个性化称呼：</strong>MOT任务话术支持分公司自定义，本周已完成产品设计，拟解决MOT话术灵活性不足、客户触达缺乏个性化的问题；</p>
+          <p>&#8226; <strong>智能聊天助手：</strong>支持企微端客户咨询智能识别及服务话术AI个性化生成，赋能企微端私域运营效率及质量双提升。</p>
+        </div>
+      </div>
+      <div class="img-zoom-wrap" onclick="openLightbox(this)">
+        <img src="4.png" alt="智能聊天助手图示" style="width: 100%; display: block;">
+        <span class="img-zoom-hint">点击放大</span>
+      </div>
+
+      <div class="progress-item" style="margin-top: 18px;">
+        <div class="progress-dot purple"></div>
+        <div class="progress-content">
+          <p><strong>本月进展：</strong>完成产品功能开发，覆盖业务知识/操作、市场行情分析、理财产品咨询、客户账户基本信息查询等业务场景，并持续进行自动化评测与人工标注。根据评测结果，制定提升解决方案，包括无效问题剔除、重复意图合并、特定简称转换等。当前<strong>问题有效识别率约76.3%、答案采纳率63.4%</strong>。</p>
+        </div>
+      </div>
+      <div class="progress-item">
+        <div class="progress-dot blue"></div>
+        <div class="progress-content">
+          <p><strong>b. 发布计划：</strong>5月底灰度一家营业部，后续结合灰度使用情况，持续扩大覆盖范围。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in delay-4">
+    <div class="section-header">
+      <div class="section-icon orange">&#128197;</div>
+      <div class="section-title">三、下月计划</div>
+    </div>
+
+    <div class="sub-header">
+      <span class="plan-sub-title blue">（1）TAClaw建设下月计划</span>
+    </div>
+    <div class="card">
+      <div class="plan-item">
+        <div class="plan-num">1</div>
+        <div class="plan-text"><strong>TAClaw底座：</strong>支持模型切换、新增定时任务消息推送等功能。</div>
+      </div>
+      <div class="plan-item">
+        <div class="plan-num">2</div>
+        <div class="plan-text"><strong>Skill：</strong>针对一期上线的52项Skill的生产使用数据进行分析，推进迭代优化；新增算法交易场景Skill开发。</div>
+      </div>
+    </div>
+
+    <div class="sub-header">
+      <span class="plan-sub-title green">（2）企微ChatBOT下月计划</span>
+    </div>
+    <div class="card">
+      <div class="plan-item">
+        <div class="plan-num">1</div>
+        <div class="plan-text"><strong>自动化执行助手：</strong>推进MOT任务话术自定义、新增客户个性化称呼等灵活性话术改造方案落地。</div>
+      </div>
+      <div class="plan-item">
+        <div class="plan-num">2</div>
+        <div class="plan-text"><strong>智能聊天助手：</strong>围绕有效问题识别率、答案采纳率的提升，项目组内持续探讨解决方案，进一步修复调优；基于企微历史会话，挖掘客户服务线索与完善客户画像进入到方案设计与开发阶段。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer fade-in delay-6">
+    <div class="footer-divider"></div>
+    TAClaw &amp; ChatBOT Project Team &middot; 2026.05
+  </div>
+
+</div>
+</body>
+</html>
